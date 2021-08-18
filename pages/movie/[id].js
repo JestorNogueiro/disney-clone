@@ -3,14 +3,20 @@ import { PlusIcon, XIcon } from "@heroicons/react/outline";
 import Head from "next/head";
 import Image from "next/image";
 import { useState } from "react";
+import ReactPlayer from "react-player";
 import Header from "../../components/Header";
 
 const API_KEY = process.env.API_KEY;
 
 function Movie({ result }) {
   // const [session]= useSession()
+
   console.log(result);
   const [showTrailer, setShowTrailer] = useState(false);
+  const index = result.videos.results.findIndex(
+    (element) => element.type === "Trailer"
+  );
+
   return (
     <div>
       <Head>
@@ -31,9 +37,11 @@ function Movie({ result }) {
             objectFit="cover"
           />
           <div className="absolute inset-y-28 md:inset-y-auto md:bottom-10 inset-x-4 md:inset-x-12 space-y-6 z-50 ">
-            <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold hover:bg-black/30 px-2 max-w-2xl">
               {result.title || result.original_name}
             </h1>
+
+            {/* .........Movie Button section......... */}
             <div className="flex items-center space-x-3 md:space-x-5">
               <button className="text-xs md:text-base bg-[#f9f9f9f9] text-black flex items-center justify-center py-2.5 px-6 rounded hover:bg-[#c6c6c6]">
                 <img
@@ -46,7 +54,7 @@ function Movie({ result }) {
                 </span>
               </button>
               <button
-                className="text-xs md:text-base bg-black/30 text-white flex items-center justify-center py-2.5 px-6 rounded hover:bg-[#c6c6c6]"
+                className="text-xs md:text-base bg-black/30 text-white flex items-center justify-center py-2.5 px-6 rounded hover:bg-[#c6c6c6] hover:text-black hover:font-extrabold "
                 onClick={() => setShowTrailer(true)}
               >
                 <img
@@ -65,12 +73,16 @@ function Movie({ result }) {
                 <img src="/images/group-icon.svg" alt="group" />
               </div>
             </div>
+
+            {/* ..........Movie Details........ */}
             <p className="text-xs md:text-sm">
               {result.release_date || result.first_air_date}.{" "}
               {Math.floor(result.runtime / 60)}h{result.runtime % 60}m .{" "}
               {result.genres.map((genre) => genre.name + " ")}
             </p>
-            <h4 className="tracking-wide text-sm md:text-lg max-w-4xl font-semibold">
+
+            {/* ......Movie Description...... */}
+            <h4 className="p-2 tracking-wide text-sm md:text-lg max-w-4xl font-semibold hover:bg-black/30 ">
               {result.overview}
             </h4>
           </div>
@@ -80,19 +92,32 @@ function Movie({ result }) {
         {showTrailer && (
           <div className="absolute inset-0 bg-black opacity-50 h-full w-full z-50" />
         )}
+
+        {/* .....if ShowTailer is true than heading will display...... */}
         <div
-          className={`absolute top-3 inset-x-[7%] md:inset-x-[13%] rounded overflow-hidden transition duration-100 ${
-            showTrailer ? "opacity-100 z-50 " : "opacity-0"
-          } `}
+          className={`absolute top-5 inset-x-[7%] md:inset-x-[13%] rounded overflow-hidden transition duration-100 
+          ${showTrailer ? "opacity-100 z-[1000] " : "opacity-0"} `}
         >
-          <div className="flex items-center justify-between bg-black text-white p-3.5 ">
-            <span className="font-semibold">play trailer</span>
+          <div className="flex items-center justify-between bg-black text-white p-3.5 z-[1000]">
+            <span className="font-semibold">Playing Trailer</span>
             <div
               className="cursor-pointer w-8 h-8 flex justify-center items-center rounded-lg opacity-50 hover:opacity-75 hover:bg-[#0f0f0f]"
               onClick={() => setShowTrailer(false)}
             >
               <XIcon className="h-5" />
             </div>
+          </div>
+
+          {/* responseve react player  */}
+          <div className="relative pt-[56.25%] z-[1000]">
+            <ReactPlayer
+              url={`https://www.youtube.com/watch?v=${result.videos?.results[index]?.key}`}
+              width="100%"
+              height="100%"
+              controls={true}
+              style={{ position: "absolute", top: "0", left: "0" }} //styles is require for responssivness
+              playing={showTrailer}
+            />
           </div>
         </div>
       </section>
