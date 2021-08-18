@@ -1,16 +1,28 @@
 // import { getSession, useSession } from "next-auth/client";
-import { PlusIcon } from "@heroicons/react/outline";
+import { PlusIcon, XIcon } from "@heroicons/react/outline";
 import Head from "next/head";
 import Image from "next/image";
-import { useState } from "react";
+import router from "next/router";
+import { useState, useEffect } from "react";
+import ReactPlayer from "react-player";
 import Header from "../../components/Header";
-
+import { useRouter } from "next/router";
 const API_KEY = process.env.API_KEY;
 
 function Show({ result }) {
   // const [session]= useSession()
+  const router = useRouter();
   console.log(result);
-  const [showTrailer, setShowTriler] = useState(false);
+  const [showTrailer, setShowTrailer] = useState(false);
+  const index = result.videos.results.findIndex(
+    (element) => element.type === "Trailer"
+  );
+
+  //   useEffect(()=>{
+  // if (!session){
+  //   router.push('/')
+  // }
+  //   },[])
   return (
     <div>
       <Head>
@@ -27,11 +39,12 @@ function Show({ result }) {
                 result.backdrop_path || result.poster_path
               }` || `https://image.tmdb.org/t/p/original/${result.poster_path}`
             }
+            // quality={100}
             layout="fill"
             objectFit="cover"
           />
           <div className="absolute inset-y-28 md:inset-y-auto md:bottom-10 inset-x-4 md:inset-x-12 space-y-6 z-50 ">
-            <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold hover:bg-black/30 px-2 max-w-2xl">
               {result.title || result.original_name}
             </h1>
             <div className="flex items-center space-x-3 md:space-x-5">
@@ -46,13 +59,13 @@ function Show({ result }) {
                 </span>
               </button>
               <button
-                className="text-xs md:text-base bg-black/30 text-white flex items-center justify-center py-2.5 px-6 rounded hover:bg-[#c6c6c6]"
-                onClick={() => setShowTriler(true)}
+                className="text-xs md:text-base bg-black/30 text-white flex items-center justify-center py-2.5 px-6 rounded hover:bg-[#c6c6c6] hover:text-black hover:font-extrabold "
+                onClick={() => setShowTrailer(true)}
               >
                 <img
                   src="/images/play-icon-white.svg"
                   alt="play"
-                  className="h-6 md:h-8"
+                  className="h-6 md:h-8 "
                 />
                 <span className="uppercase font-medium tracking-wide">
                   Trailer
@@ -70,7 +83,11 @@ function Show({ result }) {
               {Math.floor(result.runtime / 60)}h{result.runtime % 60}m .{" "}
               {result.genres.map((genre) => genre.name + " ")}
             </p>
-            <h4 className="tracking-wide text-sm md:text-lg max-w-4xl font-semibold">
+            <p className="max-w-xs md:text-lg text-sm bg-black/40">
+              No of Seasons : {result.number_of_seasons}
+              {" ||"} {""} No of Episodes : {result.number_of_episodes}
+            </p>
+            <h4 className="tracking-wide text-sm md:text-lg max-w-4xl font-semibold hover:bg-black/50 px-2">
               {result.overview}
             </h4>
           </div>
@@ -78,7 +95,33 @@ function Show({ result }) {
         {showTrailer && (
           <div className="absolute inset-0 bg-black opacity-50 h-full w-full z-50" />
         )}
-        <div className="absolute">play trailer</div>
+        {/* .....if ShowTailer is true than heading will display...... */}
+        <div
+          className={`absolute top-5 inset-x-[7%] md:inset-x-[13%] rounded overflow-hidden transition duration-100 
+          ${showTrailer ? "opacity-100 z-[1000] " : "opacity-0"} `}
+        >
+          <div className="flex items-center justify-between bg-black text-white p-3.5 z-[1000] border-b-2 border-white/40 rounded">
+            <span className="font-semibold">Playing Trailer</span>
+            <div
+              className="cursor-pointer w-8 h-8 flex justify-center items-center rounded-lg opacity-50 hover:opacity-75 hover:bg-[#0f0f0f]"
+              onClick={() => setShowTrailer(false)}
+            >
+              <XIcon className="h-5" />
+            </div>
+          </div>
+
+          {/* responseve react player  */}
+          <div className="relative pt-[56.25%] z-[1000]">
+            <ReactPlayer
+              url={`https://www.youtube.com/watch?v=${result.videos?.results[index]?.key}`}
+              width="100%"
+              height="100%"
+              controls={true}
+              style={{ position: "absolute", top: "0", left: "0" }} //styles is require for responssivness
+              playing={showTrailer}
+            />
+          </div>
+        </div>
       </section>
     </div>
   );
