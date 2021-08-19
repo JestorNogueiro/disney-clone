@@ -1,8 +1,14 @@
 // import { getSession, useSession } from "next-auth/client";
-import { PlusIcon, XIcon } from "@heroicons/react/outline";
+import {
+  PlusIcon,
+  XIcon,
+  ArrowCircleLeftIcon,
+  EmojiSadIcon,
+} from "@heroicons/react/outline";
 import Head from "next/head";
 import Image from "next/image";
-import { useState } from "react";
+import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
 import ReactPlayer from "react-player";
 import Header from "../../components/Header";
 
@@ -11,12 +17,17 @@ const API_KEY = process.env.API_KEY;
 function Movie({ result }) {
   // const [session]= useSession()
 
-  console.log(result);
+  // console.log(result);
   const [showTrailer, setShowTrailer] = useState(false);
+  const router = useRouter();
   const index = result.videos.results.findIndex(
     (element) => element.type === "Trailer"
   );
 
+  //checks wheather the fetched data have youtube video
+  const videoLenght = result.videos.results.length;
+
+  console.log("vvvideo", videoLenght);
   return (
     <div>
       <Head>
@@ -82,10 +93,14 @@ function Movie({ result }) {
             </p>
 
             {/* ......Movie Description...... */}
-            <h4 className="p-2 tracking-wide text-sm md:text-lg max-w-4xl font-semibold hover:bg-black/30 ">
+            <h4 className="text-sm md:text-lg max-w-4xl font-semibold hover:bg-black/50 px-2 md:line-clamp-6 line-clamp-7 ">
               {result.overview}
             </h4>
           </div>
+          <ArrowCircleLeftIcon
+            className="absolute m-2 h-8 text-white cursor-pointer outline-none  "
+            onClick={() => router.back()}
+          />
         </div>
 
         {/* Trailer opacity toggle */}
@@ -107,18 +122,28 @@ function Movie({ result }) {
               <XIcon className="h-5" />
             </div>
           </div>
-
-          {/* responseve react player  */}
-          <div className="relative pt-[56.25%] z-[1000]">
-            <ReactPlayer
-              url={`https://www.youtube.com/watch?v=${result.videos?.results[index]?.key}`}
-              width="100%"
-              height="100%"
-              controls={true}
-              style={{ position: "absolute", top: "0", left: "0" }} //styles is require for responssivness
-              playing={showTrailer}
-            />
-          </div>
+          {/* if the video length is more than 0 the video will display */}
+          {videoLenght > 0 ? (
+            <div className="relative pt-[56.25%] z-[1000]">
+              {/* responseve react player  */}
+              <ReactPlayer
+                url={`https://www.youtube.com/watch?v=${result.videos?.results[index]?.key}`}
+                width="100%"
+                height="100%"
+                controls={true}
+                style={{ position: "absolute", top: "0", left: "0" }} //styles is require for responssivness
+                playing={showTrailer}
+              />
+            </div>
+          ) : (
+            <div className="bg-gray-600 p-7">
+              <p className="flex items-center">
+                <EmojiSadIcon className="h-10 " />
+                <span className="px-3 font-bold"> SORRY</span>
+              </p>
+              <h1>No video to display</h1>
+            </div>
+          )}
         </div>
       </section>
     </div>
