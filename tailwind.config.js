@@ -7,10 +7,17 @@ module.exports = {
       backgroundImage: () => ({
         homeImage: "url('/images/background.png')",
       }),
+      lineClamp: {
+        7: "7",
+        8: "8",
+      },
     },
   },
   variants: {
     extend: {},
   },
-  plugins: [require("tailwind-scrollbar-hide")],
+  plugins: [
+    require("tailwind-scrollbar-hide"),
+    require("@tailwindcss/line-clamp"),
+  ],
 };
