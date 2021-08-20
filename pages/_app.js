@@ -1,11 +1,11 @@
 import "tailwindcss/tailwind.css";
 import "../styles.css";
-import { Provider } from "next-auth/client";
+
 import Router from "next/router";
 import Head from "next/head";
 import Nprogress from "nprogress";
 import Loader from "../components/Loader";
-import { useState } from "react/cjs/react.development";
+import { useState } from "react";
 
 function MyApp({ Component, pageProps }) {
   // const Router = useRouter();
@@ -37,9 +37,8 @@ function MyApp({ Component, pageProps }) {
         />
       </Head>
       {loader && <Loader />}
-      <Provider session={pageProps.session}>
-        <Component {...pageProps} />
-      </Provider>
+
+      <Component {...pageProps} />
     </>
   );
 }
