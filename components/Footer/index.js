@@ -3,13 +3,13 @@ import { FaFacebook, FaInstagram, FaLinkedin, FaGithub } from "react-icons/fa";
 
 function Footer() {
   return (
-    <section className="pt-2 text-center border-white/60  border-t-2 rounded mb-4">
+    <section className="pt-2  text-center border-white/60  border-t-2 rounded mb-4  ">
       <span className="text-white/60 ">Developed by </span>
       <span className="font-bold tracking-widest border-b ">
         @ jestor nogueiro
       </span>
 
-      <div className=" mt-3">
+      <div className=" mt-3 mb-4">
         <ul className="list-none  flex items-center justify-center">
           <li className="px-4 hover:scale-100">
             <Link href="https://www.facebook.com/jestor.nogueiro/">
