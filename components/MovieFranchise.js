@@ -3,7 +3,12 @@ function MovieFranchise() {
   return (
     <section className="flex flex-col justify-center items-center mt-10 gap-5 px-8 max-w-[1400px] md:flex-row">
       <div className="brand group ">
-        <Image src="/images/disnep.png" layout="fill" objectFit="contain" />
+        <Image
+          src="/images/disnep.png"
+          layout="fill"
+          objectFit="contain"
+          alt="disney"
+        />
         <video
           autoPlay
           loop
@@ -14,7 +19,12 @@ function MovieFranchise() {
         </video>
       </div>
       <div className="brand group ">
-        <Image src="/images/marvel.png" layout="fill" objectFit="contain" />
+        <Image
+          src="/images/marvel.png"
+          layout="fill"
+          objectFit="contain"
+          alt="disney"
+        />
         <video
           autoPlay
           loop
@@ -25,7 +35,12 @@ function MovieFranchise() {
         </video>
       </div>
       <div className="brand group ">
-        <Image src="/images/pixar.png" layout="fill" objectFit="contain" />
+        <Image
+          src="/images/pixar.png"
+          layout="fill"
+          objectFit="contain"
+          alt="disney"
+        />
         <video
           autoPlay
           loop
@@ -40,6 +55,7 @@ function MovieFranchise() {
           src="/images/national-geographic.png"
           layout="fill"
           objectFit="contain"
+          alt="disney"
         />
         <video
           autoPlay
@@ -51,7 +67,12 @@ function MovieFranchise() {
         </video>
       </div>
       <div className="brand group ">
-        <Image src="/images/starwars.png" layout="fill" objectFit="contain" />
+        <Image
+          src="/images/starwars.png"
+          layout="fill"
+          objectFit="contain"
+          alt="disney"
+        />
         <video
           autoPlay
           loop

@@ -13,6 +13,7 @@ function Hero() {
           src="/images/hero-background.jpg"
           layout="fill"
           objectFit="cover"
+          alt="header"
         />
       </div>
       <div className="flex justify-center items-center">
@@ -22,6 +23,7 @@ function Hero() {
             width="600"
             height="150"
             objectFit="contain"
+            alt="hero"
           />
           <button className="bg-blue-600 uppercase text-xl tracking-wide font-extrabold py-4 px-6 w-full rounded hover:bg-[#0485ee]">
             Get all there
@@ -36,6 +38,7 @@ function Hero() {
             width="600"
             height="70"
             objectFit="contain"
+            alt="image"
           />
         </div>
       </div>

@@ -7,9 +7,9 @@ function SeasonThumbnail({ result }) {
       </h3>
       <div className="flex space-x-6 overflow-y-hidden overflow-x-scroll scrollbar-hide p-2 -m-2">
         {result.seasons.map((pos) => (
-          <div className="  flex space-x-3 bottom-2 ">
+          <div className="  flex space-x-3 bottom-2 " key={pos.id}>
             <div className="sm:font-light md:font-bold min-w-max space-y-2 mt-3">
-              <p key={pos.id}>{pos.name}:</p>
+              <p>{pos.name}:</p>
               <p>
                 S: 0{pos.season_number} Ep: {pos.episode_count}
               </p>

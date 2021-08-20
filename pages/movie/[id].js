@@ -27,7 +27,7 @@ function Movie({ result }) {
   //checks wheather the fetched data have youtube video
   const videoLenght = result.videos.results.length;
 
-  console.log("vvvideo", videoLenght);
+  // console.log("vvvideo", videoLenght);
   return (
     <div>
       <Head>
@@ -46,6 +46,7 @@ function Movie({ result }) {
             }
             layout="fill"
             objectFit="cover"
+            alt="poster image"
           />
           <div className="absolute inset-y-28 md:inset-y-auto md:bottom-10 inset-x-4 md:inset-x-12 space-y-6 z-50 ">
             <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold hover:bg-black/30 px-2 max-w-2xl">

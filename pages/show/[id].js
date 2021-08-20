@@ -55,6 +55,7 @@ function Show({ result }) {
             // width={1000}
             // height={1000}
             layout="fill"
+            alt="poster image"
             // layout="fixed"
             // sizes="100vh"
             objectFit="cover"

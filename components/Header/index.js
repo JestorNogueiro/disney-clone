@@ -17,6 +17,7 @@ const Header = () => {
         src="/images/logo.svg"
         height="80px"
         width="80px"
+        alt="header image"
         className="cursor-pointer"
         onClick={() => router.push("/")}
       />
@@ -39,7 +40,7 @@ const Header = () => {
           <span className="span">originals</span>
         </a>
         <a className="text-white header-link group">
-          <img src="/images/movie-icon.svg" className="h-5" />
+          <img src="/images/movie-icon.svg" className="h-5" alt="movie" />
           <span className="span">movies</span>
         </a>
         <a className="text-white header-link group">
