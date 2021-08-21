@@ -10,8 +10,8 @@ import {
 } from "@heroicons/react/outline";
 import Head from "next/head";
 import Image from "next/image";
-import router from "next/router";
-import { useState, useEffect } from "react";
+
+import { useState } from "react";
 import ReactPlayer from "react-player";
 import Header from "../../components/Header";
 import { useRouter } from "next/router";
