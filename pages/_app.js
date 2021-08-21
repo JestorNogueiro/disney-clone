@@ -5,6 +5,7 @@ import Router from "next/router";
 import Head from "next/head";
 import Nprogress from "nprogress";
 import Loader from "../components/Loader";
+import Loader2 from "../components/Loader2";
 import { useState } from "react";
 
 function MyApp({ Component, pageProps }) {
@@ -12,6 +13,7 @@ function MyApp({ Component, pageProps }) {
   Nprogress.configure({ showSpinner: true });
 
   const [loader, SetLoader] = useState(false);
+  const [loadPage, SetLoadPage] = useState(true);
 
   Router.events.on("routeChangeStart", (url) => {
     console.log("route is changing");
@@ -20,11 +22,11 @@ function MyApp({ Component, pageProps }) {
   });
 
   Router.events.on("routeChangeComplete", (url) => {
-    console.log("route is complete");
+    // console.log("route is complete");
     SetLoader(false);
     Nprogress.done();
   });
-
+  const setfalse = () => SetLoadPage(false);
   return (
     <>
       <Head>
@@ -37,8 +39,7 @@ function MyApp({ Component, pageProps }) {
         />
       </Head>
       {loader && <Loader />}
-
-      <Component {...pageProps} />
+      {loadPage ? <Loader2 set={setfalse} /> : <Component {...pageProps} />}
     </>
   );
 }
