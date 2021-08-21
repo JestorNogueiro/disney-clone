@@ -51,8 +51,8 @@ export default function Home({
           title={"Top Rated Shows"}
           ResponseData={topRatedShows}
         />
-        <Footer />
       </main>
+        <Footer />
       {/* ) : (
         <Hero />
       )} */}
