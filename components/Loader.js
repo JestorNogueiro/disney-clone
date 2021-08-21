@@ -6,16 +6,16 @@ function Loader() {
         <Image
           src="/images/logo.svg"
           alt="loading. "
-          height={120}
-          width={180}
+          height={105}
+          width={150}
           loading="eager"
         />
         <h2 className=" text-3xl text-center  ">Loading...</h2>
       </div>
       <Image
         src="/spinner.svg"
-        width={60}
-        height={60}
+        width={55}
+        height={55}
         alt="spinner"
         className="my-4"
       />
