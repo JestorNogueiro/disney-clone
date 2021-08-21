@@ -9,8 +9,8 @@ function Loader2({ set }) {
     }, 3800);
   }, []);
   return (
-    <div className="bg-black/80  text-white flex flex-col items-center justify-center inset-auto top-[10px] fixed h-[100vh] z-[10000] w-[100%] gap-46 ">
-      <div className="mb-[50px] ">
+    <div className="bg-black/80  text-white flex flex-col items-center justify-center inset-auto top-[10px] fixed h-[100vh] z-[10000] w-[100%] ">
+      <div className="mb-[20px] ">
         <Image
           src="/images/logo.svg"
           alt="loading. "
